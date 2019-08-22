@@ -6,14 +6,34 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.105.122.65:3306/xc_user?characterEncoding=utf-8
-    username: root
-    password: 263385aA+
+    druid:
+      url: jdbc:mysql://39.105.122.65:3306/xc_user?characterEncoding=utf-8
+      username: root
+      password: 263385aA+
+      driverClassName: com.mysql.jdbc.Driver
+      initialSize: 5  #初始建立连接数量
+      minIdle: 5  #最小连接数量
+      maxActive: 20 #最大连接数量
+      maxWait: 10000  #获取连接最大等待时间，毫秒
+      testOnBorrow: true #申请连接时检测连接是否有效
+      testOnReturn: false #归还连接时检测连接是否有效
+      timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
+      minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
 
-
-redis:
-  database: 0
-  host: localhost
-  port: 6379
+auth:
+  tokenValiditySeconds: 1200  #token存储到redis的过期时间
+  clientId: overun
+  clientSecret: overun
+  cookieDomain: localhost
+  cookieMaxAge: -1
+encrypt:
+  key-store:
+    location: classpath:/overun.keystore #密钥路径
+    secret: overun  #密钥访问密码
+    alias: ovkey
+    password: overun  #密钥访问密码
 

@@ -34,8 +34,8 @@ public class AuthService {
 
     @Value("${auth.tokenValiditySeconds}")
     int tokenValiditySeconds;
-    @Autowired
-    LoadBalancerClient loadBalancerClient;
+
+    /** @Autowired LoadBalancerClient loadBalancerClient; */
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -128,9 +128,10 @@ public class AuthService {
     private AuthToken applyToken(String username, String password, String clientId, String clientSecret){
         /** 从eureka中获取认证服务的地址（因为spring security在认证服务中） */
         /** 从eureka中获取认证服务的一个实例的地址 */
-        ServiceInstance serviceInstance = loadBalancerClient.choose("认证服务实例名称");
+        /** ServiceInstance serviceInstance = loadBalancerClient.choose("认证服务实例名称"); */
+
         /** 此地址就是http://ip:port */
-        URI uri = serviceInstance.getUri();
+        /** URI uri = serviceInstance.getUri(); */
         /** 令牌申请的地址 http://localhost:9239/auth/oauth/token */
         /** String authUrl = uri+ "/auth/oauth/token"; */
         String authUrl = "http://localhost:9239/auth/oauth/token";

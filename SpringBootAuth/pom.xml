@@ -11,5 +11,8 @@
 
     <artifactId>SpringBootAuth</artifactId>
 
+    <dependencies>
 
+
+    </dependencies>
 </project>
