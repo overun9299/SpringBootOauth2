@@ -1,0 +1,6 @@
+server:
+  port: 9240
+  servlet:
+    context-path: /app
+
+
