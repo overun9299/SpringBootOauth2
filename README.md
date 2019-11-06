@@ -8,8 +8,8 @@
 * postman请求http://localhost:9239/auth/oauth/token
   * 参数
     * grant_type：密码模式授权填写password
-    * username：账号
-    * password：密码
+    * username：账号(admin)
+    * password：密码(123)
 * 并且此链接需要使用 http Basic认证（此处的账号密码必须在oauth_client_details表中存在不然验证不通过）
   * Username：overun
   * Password：overun
