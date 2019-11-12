@@ -1,5 +1,6 @@
 package overun.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -28,6 +30,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     /** 公钥 */
     private static final String PUBLIC_KEY = "publickey.txt";
+
+    @Value("${oauth2.client-id}")
+    private String clientId;
 
     /**
      * 定义JwtTokenStore，使用jwt令牌
@@ -78,5 +83,16 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/swagger-resources","/swagger-resources/configuration/security",
                         "/swagger-ui.html","/webjars/**").permitAll()
                 .anyRequest().authenticated();
+    }
+
+    /**
+     * 设置资源id 对应oauth_client_details表中的resource_ids字段
+     * @param resources
+     * @throws Exception
+     */
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        /** 设置资源id */
+        resources.resourceId(clientId);
     }
 }
