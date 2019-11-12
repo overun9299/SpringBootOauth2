@@ -1,4 +1,4 @@
-package overun.service;
+package overun.service.impl;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,11 +10,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;
-import overun.vo.UserCust;
+import overun.service.AcUserService;
+import overun.vo.AcUser;
 import overun.vo.UserJwt;
 
 import java.util.ArrayList;
@@ -27,6 +27,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     ClientDetailsService clientDetailsService;
 
+    @Autowired
+    private AcUserService acUserService;
+
+    /**
+     * 校验用户信息，并返回用户信息（密码模式会先走这一步）
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         /** 取出身份，如果身份为空说明没有认证 */
@@ -43,10 +52,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        /** 远程调用用户中心根据账号查询用户信息,此处先使用假数据 */
-        UserCust userext = new UserCust();
-        userext.setUsername("soap");
-        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
+        /** 远程调用用户中心根据账号查询用户信息 */
+        AcUser userext = acUserService.selectAcUserByUserName(username);
         if(userext == null){
             /** 返回空给spring security表示用户不存在 */
             return null;
@@ -67,8 +74,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userDetails.setId(userext.getId());
         /** 用户类型 */
         userDetails.setUtype(userext.getUtype());
-        /** 所属企业 */
-        userDetails.setCompanyId(userext.getCompanyId());
         /** 用户名称 */
         userDetails.setName(userext.getName());
         /** 用户头像 */

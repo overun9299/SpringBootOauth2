@@ -1,6 +1,7 @@
 package overun.utils;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @ClassName: BCryptUtil
@@ -14,7 +15,7 @@ public class BCryptUtil {
 
 
     /**
-     * 加密
+     * client表加密
      * @param password
      * @return
      */
@@ -23,7 +24,7 @@ public class BCryptUtil {
     }
 
     /**
-     * 验证密码是否正确
+     * client表验证密码是否正确
      * @param original 原始密码
      * @param encryption 加密后密码
      * @return
@@ -32,7 +33,29 @@ public class BCryptUtil {
         return BCrypt.checkpw(original, encryption);
     }
 
+    /**
+     * ac_user表密码加密
+     * @param OriginalPassWord
+     * @return
+     */
+    public static String userEncode(String OriginalPassWord) {
+        return new BCryptPasswordEncoder().encode(OriginalPassWord);
+    }
+
+    /**
+     * 校验密码
+     * @param original 原始密码
+     * @param encryption 加密后密码
+     * @return
+     */
+    public static Boolean userCheckPw(String original, String encryption) {
+        return new BCryptPasswordEncoder().matches(original, encryption);
+    }
+
     public static void main(String[] args) {
+
+        System.out.println(BCryptUtil.userEncode("263385"));
+
         /** $2a$10$2edS2ByARmZlCJ7s1aWPPekQMBMnSgseE/a7GjIrCGdYGP4OwahxO */
         String password = "overun";
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -42,5 +65,9 @@ public class BCryptUtil {
         System.out.println(overun);
         boolean overun2 = BCrypt.checkpw("XcWebApp", "$2a$10$9bEpZ/hWRQxyr5hn5wHUj.jxFpIrnOmBcWlE/g/0Zp3uNxt9QTh/S");
         System.out.println(overun2);
+        boolean overun3 = BCrypt.checkpw("123", "$2a$10$TJ4TmCdK.X4wv/tCqHW14.w70U3CC33CeVncD3SLmyMXMknstqKRe");
+        System.out.println(overun3);
+
+        System.out.println(new BCryptPasswordEncoder().encode("123"));
     }
 }

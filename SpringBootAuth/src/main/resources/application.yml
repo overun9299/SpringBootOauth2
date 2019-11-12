@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://39.105.122.65:3306/xc_user?characterEncoding=utf-8
+      url: jdbc:mysql://39.105.122.65:3306/auth_center?characterEncoding=utf-8
       username: root
       password: 263385aA+
       driverClassName: com.mysql.jdbc.Driver
@@ -24,6 +24,7 @@ spring:
     host: localhost
     port: 6379
 
+
 auth:
   tokenValiditySeconds: 1200  #token存储到redis的过期时间
   clientId: overun
@@ -36,4 +37,5 @@ encrypt:
     secret: overun  #密钥访问密码
     alias: ovkey
     password: overun  #密钥访问密码
-
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
