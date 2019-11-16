@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringBootApp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringBootAuth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringSecurityOauth2Server" charset="UTF-8" />
   </component>
 </project>

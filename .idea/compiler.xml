@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SpringBootApp" />
         <module name="SpringBootAuth" />
+        <module name="SpringSecurityOauth2Server" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
       <module name="SpringBootApp" options="-parameters" />
       <module name="SpringBootAuth" options="-parameters" />
       <module name="SpringBootOauth2" options="-parameters" />
+      <module name="SpringSecurityOauth2Server" options="-parameters" />
     </option>
   </component>
 </project>
