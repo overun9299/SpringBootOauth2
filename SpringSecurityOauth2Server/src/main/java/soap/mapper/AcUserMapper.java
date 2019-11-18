@@ -2,6 +2,7 @@ package soap.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import soap.domain.AcPermission;
 import soap.domain.AcUser;
 import soap.domain.AcUserExample;
 
@@ -31,4 +32,6 @@ public interface AcUserMapper {
     int updateByPrimaryKeySelective(AcUser record);
 
     int updateByPrimaryKey(AcUser record);
+
+    List<AcPermission> selectPermissionByUserId(@Param("userId")Long id);
 }

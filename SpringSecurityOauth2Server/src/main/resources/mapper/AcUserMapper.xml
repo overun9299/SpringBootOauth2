@@ -18,6 +18,17 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <resultMap id="BaseResultMapPer" type="soap.domain.AcPermission">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="enname" jdbcType="VARCHAR" property="enname" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -365,4 +376,20 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectPermissionByUserId" resultMap="BaseResultMapPer">
+    SELECT
+      p.*
+    FROM
+      ac_user AS u
+      LEFT JOIN ac_user_role AS ur
+        ON u.id = ur.user_id
+      LEFT JOIN ac_role AS r
+        ON r.id = ur.role_id
+      LEFT JOIN ac_role_permission AS rp
+        ON r.id = rp.role_id
+      LEFT JOIN ac_permission AS p
+        ON p.id = rp.permission_id
+    WHERE u.id = ${userId}
+  </select>
 </mapper>

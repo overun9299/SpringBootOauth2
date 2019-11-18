@@ -12,6 +12,7 @@
         <module>SpringBootAuth</module>
         <module>SpringBootApp</module>
         <module>SpringSecurityOauth2Server</module>
+        <module>SpringSecurityOauth2Resources</module>
     </modules>
 
     <parent>
