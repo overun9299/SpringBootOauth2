@@ -14,6 +14,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        /** 此处对应ac_permission这张表 */
         http.authorizeRequests()
                 .antMatchers("/auth2Res/**").hasAuthority("System")
                 .antMatchers("/view/getAcPermission/**").hasAuthority("SystemUserView").and().formLogin();

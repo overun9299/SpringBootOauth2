@@ -1,6 +1,6 @@
 ----
 ### SpringBootOauth2
-#### SpringBoot整合Oauth2认证中心
+#### SpringBoot整合Oauth2认证中心（弱依赖）
 
 ----
 ##### SpringBootAuth Oauth2认证中心(密码模式)
@@ -57,6 +57,33 @@ keytool -genkeypair -alias ovkey -keyalg RSA -keypass overun -keystore overun.ke
 keytool -list -rfc --keystore C:\Users\admin\Desktop\jwt\overun.keystore | openssl x509 -inform pem -pubkey
 ```
 放入需要授权控制的服务下 例:publickey.txt
+
+
+----
+#### SpringBoot整合Oauth2认证中心（强依赖）
+##### 强依赖模式就是资源服务的每一步操作，到要去请求授权服务再验证该用户是否有权限，可以做类似与中台系统
+
+----
+* SpringSecurityOauth2Server强依赖模式的认证授权服务器
+* SpringSecurityOauth2Resources强依赖模式的资源服务器
+
+----
+
+**请求方式：**
+* 获取code
+
+
+**浏览器访问http://localhost:8848/auth2/oauth/authorize?client_id=overun&response_type=code**
+
+
+**然后跳转登陆页面 参数 User:soap  Password:263385,授权后得到code。**
+* 获取access_token
+
+**postman请求获取access_token，http://client:secret@localhost:8848/auth2/oauth/token 参数 grant_type:authorization_code,code:上步操作获取的code**
+并且此链接需要使用Basic Auth认证，username:overun password:overun。获取到access_token后在访问资源服务器时?access_token=27f78c35-3f28-429b-80c8-7a9e07ec1130要加上token
+
+
+
 
 
 
