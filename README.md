@@ -73,8 +73,8 @@ keytool -list -rfc --keystore C:\Users\admin\Desktop\jwt\overun.keystore | opens
 * 获取code
 
 
-**浏览器访问http://localhost:8848/auth2/oauth/authorize?client_id=overun&response_type=code**
-
+**浏览器访问http://localhost:8848/auth2/oauth/authorize?client_id=overun&response_type=code(包括自定义页面)**
+**自定义登陆、授权页面参考:doc文件夹下的资料，或者访问https://blog.csdn.net/u013310119/article/details/94613332**
 
 **然后跳转登陆页面 参数 User:soap  Password:263385,授权后得到code。**
 * 获取access_token

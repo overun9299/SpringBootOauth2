@@ -15,11 +15,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="SpringBootApp" options="-parameters" />
-      <module name="SpringBootAuth" options="-parameters" />
-      <module name="SpringBootOauth2" options="-parameters" />
-      <module name="SpringSecurityOauth2Resources" options="-parameters" />
-      <module name="SpringSecurityOauth2Server" options="-parameters" />
+      <module name="SpringBootApp" options="" />
+      <module name="SpringBootAuth" options="" />
+      <module name="SpringBootOauth2" options="" />
+      <module name="SpringSecurityOauth2Resources" options="" />
+      <module name="SpringSecurityOauth2Server" options="" />
     </option>
   </component>
 </project>

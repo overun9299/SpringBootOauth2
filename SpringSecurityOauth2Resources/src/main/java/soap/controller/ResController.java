@@ -22,8 +22,24 @@ public class ResController {
     @Autowired
     private AcPermissionService acPermissionService;
 
+    /**
+     * 获取AcPermission需要授权
+     * 在ResourceServerConfiguration中配置
+     * @return
+     */
     @RequestMapping(value = "/getAcPermission")
     public String getAcPermission() {
+        return acPermissionService.getAcPermission();
+    }
+
+
+    /**
+     * 获取AcPermission不需要授权
+     * 在ResourceServerConfiguration中配置
+     * @return
+     */
+    @RequestMapping(value = "/getAcPermissionNoAuth")
+    public String getAcPermissionNoAuth() {
         return acPermissionService.getAcPermission();
     }
 }

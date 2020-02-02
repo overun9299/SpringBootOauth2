@@ -7,9 +7,9 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://39.105.122.65:3306/auth_center?characterEncoding=utf-8
+      url: jdbc:mysql://127.0.0.1:3306/auth_center?characterEncoding=utf-8
       username: root
-      password: 263385aA+
+      password: root
       driverClassName: com.mysql.jdbc.Driver
       initialSize: 5  #初始建立连接数量
       minIdle: 5  #最小连接数量
