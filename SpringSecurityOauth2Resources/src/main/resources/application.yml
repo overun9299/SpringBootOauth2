@@ -8,7 +8,7 @@ spring:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/auth_center?characterEncoding=utf-8
       username: root
-      password: root
+      password: 9299
       driverClassName: com.mysql.jdbc.Driver
       initialSize: 5  #初始建立连接数量
       minIdle: 5  #最小连接数量
@@ -33,6 +33,10 @@ security:
       user-authorization-uri: http://localhost:8848/auth2/oauth/authorize
     resource:
       token-info-uri: http://localhost:8848/auth2/oauth/check_token
+
+#通过code获取access_token配置
+get-access-token-by-code-url: http://client:secret@localhost:8848/auth2/oauth/token
+grantType: authorization_code
 
 logging:
   level:
