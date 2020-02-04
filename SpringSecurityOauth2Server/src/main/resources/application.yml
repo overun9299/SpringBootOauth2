@@ -22,6 +22,11 @@ spring:
     prefix: classpath:/views/
     suffix: .html
     cache: false
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    password:
 
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml

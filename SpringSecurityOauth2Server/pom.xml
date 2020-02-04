@@ -35,6 +35,19 @@
             <version>2.0.0.RELEASE</version>
         </dependency>
 
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <!-- 指明版本，解决redis存储出现的问题：java.lang.NoSuchMethodError: org.springframework.data.redis.connection.RedisConnection.set([B[B)V问题 -->
+            <version>2.3.3.RELEASE</version>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
