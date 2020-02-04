@@ -8,7 +8,7 @@ spring:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/auth_center?characterEncoding=utf-8
       username: root
-      password: 9299
+      password: root
       driverClassName: com.mysql.jdbc.Driver
       initialSize: 5  #初始建立连接数量
       minIdle: 5  #最小连接数量
@@ -18,7 +18,23 @@ spring:
       testOnReturn: false #归还连接时检测连接是否有效
       timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
       minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）
-
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    seconds: 43200
+    pool:
+      max-active: 1000
+      max-wait: 10000
+      max-idle: 100
+      min-idle: 30
+    timeout: 10000
+    testOnBorrow: true
+    testWhileIdle: true
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false
 
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
