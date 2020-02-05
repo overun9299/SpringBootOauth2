@@ -45,22 +45,8 @@ public class LoginPageController {
     @ResponseBody
     public void loginOut() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
         SessionUtils.removeAttr(request , "SPRING_SECURITY_CONTEXT");
         SessionUtils.removeAttr(request , "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN");
-    }
-
-
-    /**
-     * 取出cookie中的身份令牌
-     * @return
-     */
-    private String getTokenFormCookie(){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Map<String, String> map = CookieUtil.readCookie(request, "JSESSIONID");
-        if(map!=null && map.get("JSESSIONID")!=null){
-            String sessionId = map.get("JSESSIONID");
-            return sessionId;
-        }
-        return null;
     }
 }

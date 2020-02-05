@@ -3,7 +3,6 @@ package soap.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -12,8 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
 
 import javax.sql.DataSource;
 
@@ -37,7 +35,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //        /** 基于 JDBC 实现，令牌保存到数据 */
 //        return new JdbcTokenStore(dataSource);
         /** token保存在内存中（也可以保存在数据库、Redis中） */
-        return new RedisTokenStore(redisConnectionFactory);
+        return new MyRedisTokenStore(redisConnectionFactory);
     }
 
     @Bean
@@ -52,6 +50,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints.tokenStore(tokenStore());
         /** 最后一个参数为替换之后授权页面的url */
         endpoints.pathMapping("/oauth/confirm_access","/custom/confirm_access");
+        /** 设置失效时间 */
+
     }
 
     @Override
