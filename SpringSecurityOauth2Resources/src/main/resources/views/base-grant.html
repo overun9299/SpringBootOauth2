@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>授权</title>
+</head>
+<style>
+
+    html{
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .title {
+        background-color: #E9686B;
+        height: 50px;
+        padding-left: 20%;
+        padding-right: 20%;
+        color: white;
+        line-height: 50px;
+        font-size: 18px;
+    }
+    .title-left{
+        float: right;
+    }
+    .title-right{
+        float: left;
+    }
+    .title-left a{
+        color: white;
+    }
+    .container{
+        clear: both;
+        text-align: center;
+    }
+    .btn {
+        width: 350px;
+        height: 35px;
+        line-height: 35px;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 3px;
+        background-color: #E9686B;
+        color: white;
+        border: none;
+        font-size: 15px;
+    }
+</style>
+<body style="margin: 0px">
+<div class="title">
+    <div class="title-right">access_token信息</div>
+
+</div>
+<div class="container">
+    <p>access_token信息</p>
+    <input class="text"  size="180" th:value="${data}" />
+    <form method="get" action="http://localhost:8848/auth2/auth/loginOut">
+        <button class="btn" type="submit">退出</button>
+    </form>
+</div>
+</body>
+</html>
