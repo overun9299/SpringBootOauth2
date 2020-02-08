@@ -2,6 +2,7 @@ package soap.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStoreSerializationStrategy;
 import org.springframework.stereotype.Service;
 import soap.domain.AcPermission;
+import soap.domain.AcPermissionExample;
 import soap.mapper.AcPermissionMapper;
 import soap.redis.JedisTools;
 import soap.service.AcPermissionService;
@@ -29,6 +31,9 @@ import java.util.List;
 @Service
 public class AcPermissionServiceImpl implements AcPermissionService {
 
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
+
     @Autowired
     private AcPermissionMapper acPermissionMapper;
 
@@ -44,12 +49,15 @@ public class AcPermissionServiceImpl implements AcPermissionService {
         OAuth2RefreshToken oAuth2RefreshToken = redisTokenStore.readRefreshToken("d2e17f0d-7ac9-485f-89d5-b2e1794f3586");
         OAuth2Authentication oAuth2Authentication = redisTokenStore.readAuthentication("bc1757e8-8d07-4bcd-92c6-9fbf413d1fa7");
         OAuth2AccessToken oAuth2AccessToken = redisTokenStore.readAccessToken("bc1757e8-8d07-4bcd-92c6-9fbf413d1fa7");
-
-
-
-
-
         List<AcPermission> acPermissions = acPermissionMapper.selectByExample(null);
         return JSONObject.toJSONString(acPermissions);
+    }
+
+    @Override
+    public List<AcPermission> getAcPermissionByClientId() {
+        AcPermissionExample example = new AcPermissionExample();
+        example.or().andClientIdEqualTo(clientId);
+        List<AcPermission> acPermissions = acPermissionMapper.selectByExample(example);
+        return acPermissions;
     }
 }

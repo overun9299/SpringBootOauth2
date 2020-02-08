@@ -1,5 +1,9 @@
 package soap.service;
 
+import soap.domain.AcPermission;
+
+import java.util.List;
+
 /**
  * @ClassName: AcPermissionService
  * @Description:
@@ -11,8 +15,14 @@ package soap.service;
 public interface AcPermissionService {
 
     /**
-     * 获取权限
+     * 获取的权限（测试）
      * @return
      */
     String getAcPermission();
+
+    /**
+     * 获取client对应的AcPermission
+     * @return
+     */
+    List<AcPermission> getAcPermissionByClientId();
 }
