@@ -1,13 +1,11 @@
 package soap.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import soap.domain.AcPermission;
 import soap.domain.AcPermissionExample;
 
 import java.util.List;
 
-@Mapper
 public interface AcPermissionMapper {
     long countByExample(AcPermissionExample example);
 

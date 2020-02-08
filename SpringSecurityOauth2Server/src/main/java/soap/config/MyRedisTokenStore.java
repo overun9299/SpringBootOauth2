@@ -1,5 +1,6 @@
 package soap.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.ExpiringOAuth2RefreshToken;
@@ -34,6 +35,8 @@ public class MyRedisTokenStore implements TokenStore {
     private static final String REFRESH_TO_ACCESS = "oauth2:refresh_to_access:";
     private static final String CLIENT_ID_TO_ACCESS = "oauth2:client_id_to_access:";
     private static final String UNAME_TO_ACCESS = "oauth2:uname_to_access:";
+    /** redis失效时间 单位-秒 */
+    private static final int seconds = 1200;
     private static final boolean springDataRedis_2_0 = ClassUtils.isPresent("org.springframework.data.redis.connection.RedisStandaloneConfiguration", MyRedisTokenStore.class.getClassLoader());
     private final RedisConnectionFactory connectionFactory;
     private AuthenticationKeyGenerator authenticationKeyGenerator = new DefaultAuthenticationKeyGenerator();
@@ -196,8 +199,6 @@ public class MyRedisTokenStore implements TokenStore {
 
             conn.rPush(clientId, new byte[][]{serializedAccessToken});
             if (token.getExpiration() != null) {
-//                int seconds = token.getExpiresIn();
-                int seconds = 120;
                 conn.expire(accessKey, (long)seconds);
                 conn.expire(authKey, (long)seconds);
                 conn.expire(authToAccessKey, (long)seconds);
@@ -227,8 +228,6 @@ public class MyRedisTokenStore implements TokenStore {
                     ExpiringOAuth2RefreshToken expiringRefreshToken = (ExpiringOAuth2RefreshToken)refreshToken;
                     Date expiration = expiringRefreshToken.getExpiration();
                     if (expiration != null) {
-//                        int seconds = Long.valueOf((expiration.getTime() - System.currentTimeMillis()) / 1000L).intValue();
-                        int seconds = 120;
                         conn.expire(refreshToAccessKey, (long)seconds);
                         conn.expire(accessToRefreshKey, (long)seconds);
                     }
@@ -333,8 +332,6 @@ public class MyRedisTokenStore implements TokenStore {
                 ExpiringOAuth2RefreshToken expiringRefreshToken = (ExpiringOAuth2RefreshToken)refreshToken;
                 Date expiration = expiringRefreshToken.getExpiration();
                 if (expiration != null) {
-//                    int seconds = Long.valueOf((expiration.getTime() - System.currentTimeMillis()) / 1000L).intValue();
-                    int seconds = 120;
                     conn.expire(refreshKey, (long)seconds);
                     conn.expire(refreshAuthKey, (long)seconds);
                 }

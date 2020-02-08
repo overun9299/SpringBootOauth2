@@ -1,11 +1,13 @@
 package soap.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 @Configuration
 @EnableResourceServer
@@ -25,7 +27,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/view/getAcPermissionNoAuth/**").permitAll()
                 .antMatchers("/auth2Res/**").hasAuthority("System")
-                .antMatchers("/view/getAcPermission/**").hasAuthority("SystemUserView").and().formLogin();
+                .antMatchers("/view/getAcPermission/**").hasAuthority("SystemUserView")
+                .antMatchers("/addAcUser").hasAuthority("SystemUserView").and().formLogin();
+
+
     }
 
 }

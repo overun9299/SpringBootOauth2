@@ -11,6 +11,10 @@ public class AcPermission {
 
     private String enname;
 
+    private String permit;
+
+    private String clientId;
+
     private String url;
 
     private String description;
@@ -49,6 +53,22 @@ public class AcPermission {
 
     public void setEnname(String enname) {
         this.enname = enname;
+    }
+
+    public String getPermit() {
+        return permit;
+    }
+
+    public void setPermit(String permit) {
+        this.permit = permit;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getUrl() {

@@ -38,6 +38,8 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #配置授权服务器地址，及自身client-id和client-secret
 security:
