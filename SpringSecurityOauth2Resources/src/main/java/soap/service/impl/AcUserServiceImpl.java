@@ -36,9 +36,10 @@ public class AcUserServiceImpl implements AcUserService {
                     /** 报错，存在相同 */
                     result.put("msg" , "存在相同的用户");
                     result.put("succeed" , false);
+                    return JSONObject.toJSONString(result);
                 }
                 /** 设置id */
-                acUser.setId(UUID.randomUUID().toString().replace("-",""));
+                acUser.setId(String.valueOf(System.currentTimeMillis()));
                 /** 加密密码 */
                 acUser.setPassword(BCryptUtil.userEncode(acUser.getPassword()));
                 /** 创建、更新时间 */
@@ -50,11 +51,12 @@ public class AcUserServiceImpl implements AcUserService {
                 if (insert == 1) {
                     result.put("msg" , "新增成功");
                     result.put("succeed" , true);
+                    return JSONObject.toJSONString(result);
                 }
             }
 
         }
-        result.put("msg" , "存在相同的用户");
+        result.put("msg" , "数据异常");
         result.put("succeed" , false);
 
         return JSONObject.toJSONString(result);

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 public class BCryptUtil {
 
+    private static BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     /**
      * client表加密
@@ -39,7 +40,7 @@ public class BCryptUtil {
      * @return
      */
     public static String userEncode(String OriginalPassWord) {
-        return new BCryptPasswordEncoder().encode(OriginalPassWord);
+        return bCryptPasswordEncoder.encode(OriginalPassWord);
     }
 
     /**
@@ -54,20 +55,26 @@ public class BCryptUtil {
 
     public static void main(String[] args) {
 
-        System.out.println(BCryptUtil.userEncode("263385"));
+//        System.out.println(BCryptUtil.userEncode("263385"));
+//
+//        /** $2a$10$2edS2ByARmZlCJ7s1aWPPekQMBMnSgseE/a7GjIrCGdYGP4OwahxO */
+//        String password = "overun";
+//        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+//        System.out.println(hashed);
+//
+//        boolean overun = BCrypt.checkpw("overun", "$2a$10$2edS2ByARmZlCJ7s1aWPPekQMBMnSgseE/a7GjIrCGdYGP4OwahxO");
+//        System.out.println(overun);
+//        boolean overun2 = BCrypt.checkpw("XcWebApp", "$2a$10$9bEpZ/hWRQxyr5hn5wHUj.jxFpIrnOmBcWlE/g/0Zp3uNxt9QTh/S");
+//        System.out.println(overun2);
+//        boolean overun3 = BCrypt.checkpw("123", "$2a$10$TJ4TmCdK.X4wv/tCqHW14.w70U3CC33CeVncD3SLmyMXMknstqKRe");
+//        System.out.println(overun3);
+//
+//        System.out.println(new BCryptPasswordEncoder().encode("123"));
 
-        /** $2a$10$2edS2ByARmZlCJ7s1aWPPekQMBMnSgseE/a7GjIrCGdYGP4OwahxO */
-        String password = "overun";
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-        System.out.println(hashed);
 
-        boolean overun = BCrypt.checkpw("overun", "$2a$10$2edS2ByARmZlCJ7s1aWPPekQMBMnSgseE/a7GjIrCGdYGP4OwahxO");
-        System.out.println(overun);
-        boolean overun2 = BCrypt.checkpw("XcWebApp", "$2a$10$9bEpZ/hWRQxyr5hn5wHUj.jxFpIrnOmBcWlE/g/0Zp3uNxt9QTh/S");
-        System.out.println(overun2);
-        boolean overun3 = BCrypt.checkpw("123", "$2a$10$TJ4TmCdK.X4wv/tCqHW14.w70U3CC33CeVncD3SLmyMXMknstqKRe");
-        System.out.println(overun3);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println(bCryptPasswordEncoder.encode("overun"));
+        System.out.println(bCryptPasswordEncoder.encode("263385"));
 
-        System.out.println(new BCryptPasswordEncoder().encode("123"));
     }
 }
